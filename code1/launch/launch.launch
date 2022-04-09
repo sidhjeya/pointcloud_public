@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+<param name="/use_sim_time" value="true" />
+<node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0.5 -1.57 0 -1.57  base_link hokuyo_link 100" />
+
+    <param name="robot_description" command="cat '$(find code1)/urdf/01-myfirst.xacro'" />
+    
+    <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model 01-myfirst" />
+           <!-- Add robot_state_publisher node -->
+  <node name="robot_state_publisher" 
+        pkg="robot_state_publisher" 
+        type="robot_state_publisher" />
+
+          
+</launch>
